@@ -13,9 +13,9 @@ _start:
 .type		reading, @function
 reading:
 		movb	$0x00, %ah
-		int	$0x16i		#read syscall
-		movb	$0x0E, %ah	#write onf active page
-		int	$0x10		#write syscall
+		int	$0x16i		#read syscall.
+		movb	$0x0E, %ah	#write onf active page.
+		int	$0x10		#write syscall.
 
 		ret
 
