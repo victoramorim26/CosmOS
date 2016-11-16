@@ -17,16 +17,28 @@
 #along with CosmOS.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-all:
-	as --32 boot.s -o boot.o
-	gcc -m32 -c video/drive.c
-	gcc -m32 -c kernel_main.c
-	gcc -m32 -c libc/src/*.c -fno-stack-protector
+C_FLAGS = -m32 -c
+ASSEMBLY_FLAGS = --32
+LIBS_C = libc/src/*.c
+
+all:	boot drive kernel libs
 	ld -m elf_i386 -T linker.ld -o kernel.bin *.o
 	grub-file --is-x86-multiboot ./kernel.bin
 	cp kernel.bin isodir/boot
 	grub-mkrescue -o kernel.iso isodir
 	qemu-system-i386 -cdrom kernel.iso
+
+boot:
+	as $(ASSEMBLY_FLAGS) boot.s -o boot.o
+
+drive:
+	gcc $(C_FLAGS) video/drive.c
+
+kernel:
+	gcc $(C_FLAGS) kernel_main.c
+
+libs:
+	gcc $(C_FLAGS) $(LIBS_C) -fno-stack-protector
 
 clean:
 	rm ./*.bin ./*.o *.iso
