@@ -20,6 +20,8 @@ along with CosmOS.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _STDIO_H_
 #define _STDIO_H_
 
+int putchar(int c);
+int puts(const char *str);
 int printf(const char *format, ...);
 
 #endif

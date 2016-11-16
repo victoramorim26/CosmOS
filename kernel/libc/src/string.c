@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with CosmOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//#include "../include/string.h"
+#include "../include/string.h"
 
 int strlen(const char * s){
 
